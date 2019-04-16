@@ -1,8 +1,8 @@
 $(document).ready(function() {
   var i18nOpts = {
-    lng: 'en',
+    lng: 'zh',
     getAsync: true,
-    fallbackLng: 'en',
+    fallbackLng: false,
     resGetPath: 'static/locales/__lng__.json'
   };
 
