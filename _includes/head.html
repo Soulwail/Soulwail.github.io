@@ -1,7 +1,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1; minimum-scale=1; user-scalable=no;">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
   {% if page.desc %}
     <meta content="{{ page.desc }}" name="description">
   {% endif %}
@@ -22,18 +22,23 @@
   <!-- <link rel="shortcut icon" href="{{ "/static/assets/img/favicon.ico" | prepend: site.baseurl }}"> -->
 
   <!-- Main CSS -->
-  <link href="{{ "/static/assets/app-20190416.min.css" | prepend: site.baseurl }}" rel="stylesheet">
+  <link href="{{ "/static/assets/app-20190417.min.css" | prepend: site.baseurl }}" rel="stylesheet">
   <link href="{{ "/static/css/custom.css" | prepend: site.baseurl }}" rel="stylesheet">
 
   <!-- Main Scripts -->
-  <script src="{{"/static/assets/app-20190416.min.js"| prepend: site.baseurl }}"></script>
-  <script src="{{"/static/assets/blog-20190416.min.js"| prepend: site.baseurl }}"></script>
+  <script src="{{"/static/assets/app-20190417.min.js"| prepend: site.baseurl }}"></script>
+  <script src="{{"/static/assets/blog-20190417.min.js"| prepend: site.baseurl }}"></script>
+
+  <!-- Highlight -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/css.min.js"></script>
 
   <!-- Google AdSense -->
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <script>
     (adsbygoogle = window.adsbygoogle || []).push({
-      google_ad_client: "ca-pub-6196184620190416",
+      google_ad_client: "ca-pub-6196184620190417",
       enable_page_level_ads: true
     });
   </script>
