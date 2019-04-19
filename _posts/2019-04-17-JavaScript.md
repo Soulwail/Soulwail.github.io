@@ -1,6 +1,6 @@
 ---
 layout: post
-title: JS 创建对象
+title: JavaScript 之创建对象
 date: 2019-04-17
 desc: "JS 创建对象"
 keywords: "JavaScript, 创建对象"
@@ -8,8 +8,7 @@ categories: [Js]
 tags: [JS, 创建对象]
 icon: icon-javascript
 ---
-
-原文链接：alvinyuxt.github.io
+JS 创建对象的 7 种方法
 
 - 工厂模式
 - 构造函数模式
@@ -40,8 +39,7 @@ function Bird() {
 var bird1 = Bird();
 ```
 
-**优点：** 完成了返回一个对象的要求。
-
+**优点：** 完成了返回一个对象的要求。\\
 **缺点：**
 
 1. 无法通过 `constructor` 识别对象，以为都是来自 `Object`，无法得知来自 `Bird`。
@@ -62,8 +60,8 @@ var bird1 = new Bird();
 
 **优点：**
 
-1. 通过 `constructor` 或者 `instanceof` 可以识别对象实例的类别。
-2. 可以通过 `new` 关键字来创建对象实例，更像⚪⚪语言中创建对象实例。
+   1. 通过 `constructor` 或者 `instanceof` 可以识别对象实例的类别。
+   2. 可以通过 `new` 关键字来创建对象实例，更像⚪⚪语言中创建对象实例。
 
 **缺点：** 多个实例的 `say` 方法都是实现一样的效果，但是却存储了很多次（两个对象实例的 `say` 方法是不同的，因为存放的地址不同）。
 
@@ -102,14 +100,14 @@ var bird1 = new Bird();
 
 1. 出现引用的情况下会出现问题，具体情况见下面代码：
 
-  ```javascript
-  var bird1 = new Bird();
-  var bird2 = new Bird();
-  bird.feather.push('colorful');
-  console.log(bird2.feather) // ['warm', 'colorful']
-  ```
+```javascript
+var bird1 = new Bird();
+var bird2 = new Bird();
+bird.feather.push('colorful');
+console.log(bird2.feather) // ['warm', 'colorful']
+```
 
-因为 js 对引用类型的赋值都是将地址存储在变量中，所以 `bird1` 和 `bird2` 的 `feather` 属性指向的是同一块存储区域。
+&emsp;&emsp;因为 js 对引用类型的赋值都是将地址存储在变量中，所以 `bird1` 和 `bird2` 的 `feather` 属性指向的是同一块存储区域。
 
 2. 第一次调用 `fly` 方法或者 `name` 属性的时候会搜索两次，第一次是在实例上寻找 `fly` 方法，没有找到就去原型对象（`Bird.prototype`）上找 `fly` 方法，找到后就会在实例上添加这些方法或者属性。
 
@@ -128,7 +126,7 @@ Bird.prototype = {
 bird1.setName('bird3'); // Uncaught TypeError: bird1.setName is not a function
 ```
 
-这是因为对象实例和对象原型直接是通过一个指针连接的，这个指针是一个内部属性 `[[Prototype]]`，可以通过 `__proto__` 访问。我们通过对象字面量修改了 `Bird.prototype` 指向的地址，然而对象实例的 `__proto__` 并没有跟着一起更新，所以这就导致实例还在访问着原来的 `Bird.prototype`，所以建议不要通过这种方式去改变 `Bird.prototype` 属性。
+&emsp;&emsp;这是因为对象实例和对象原型直接是通过一个指针连接的，这个指针是一个内部属性 `[[Prototype]]`，可以通过 `__proto__` 访问。我们通过对象字面量修改了 `Bird.prototype` 指向的地址，然而对象实例的 `__proto__` 并没有跟着一起更新，所以这就导致实例还在访问着原来的 `Bird.prototype`，所以建议不要通过这种方式去改变 `Bird.prototype` 属性。
 
 ## 构造函数和原型组合模式
 
@@ -215,3 +213,5 @@ bird1.say(); // bird
 **优点：** 安全，`name` 成为了私有变量，只能通过 `say` 方法去访问。
 
 **缺点：** 不能区分实例的类别。
+
+原文链接：alvinyuxt.github.io
