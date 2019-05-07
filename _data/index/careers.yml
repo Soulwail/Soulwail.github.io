@@ -14,16 +14,16 @@
     i18n: company_a_job
   icon: fa-plus-square
 
-# - name:
-#     detail: Company B
-#     i18n: company_b
-#   desc:
-#     detail: I worked at Company B ...
-#     i18n: company_b_desc
-#   date:
-#     detail: Jun. 2015
-#     i18n: company_b_date
-#   job:
-#     detail: Full Stack Developer
-#     i18n: company_b_job
-#   icon: fa-plus-square
+- name:
+    detail: 公司
+    i18n: company_b
+  desc:
+    detail: "成都愚创科技有限公司"
+    i18n: company_b_desc
+  date:
+    detail: "2019 年 5 月"
+    i18n: company_b_date
+  job:
+    detail: "前端开发工程师"
+    i18n: company_b_job
+  icon: fa-plus-square
