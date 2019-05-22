@@ -1,3 +1,3 @@
 ## Welcome to GitHub Pages
 
-## service jeklly
+## jekyll serve
