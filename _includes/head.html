@@ -26,6 +26,22 @@
   <link href="{{ "/static/assets/app-20190521.min.css" | prepend: site.baseurl }}" rel="stylesheet">
   <link href="{{ "/static/css/custom.css" | prepend: site.baseurl }}" rel="stylesheet">
 
+  <!-- MathJax Section -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      "HTML-CSS": { fonts: ["TeX"] }
+    });
+  </script>
+
+  <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js' async></script>
+
   <style>
 	  table {
 	    border-left: 1px solid #000000;
