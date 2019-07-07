@@ -9,8 +9,6 @@ tags: [HTTP Request]
 icon:
 ---
 
-原文链接：[https://itbilu.com/other/relate/EkwKysXIl.html](https://itbilu.com/other/relate/EkwKysXIl.html "hp")
-
 超文本传输协议（HTTP，HyperText Transfer Protocol），是一种无状态的协议，它位于 [OSI 七层模型](https://zh.wikipedia.org/wiki/OSI%E6%A8%A1%E5%9E%8B)的传输层。HTTP 客户端会根据需要构建合适的 HTTP 请求方法，而 HTTP 服务器会根据不同的 HTTP 请求做出不同的响应。
 
 <br>
@@ -72,3 +70,7 @@ GET www.google.com
 
 - GET 可提交的数据量受到 URL 长度的限制，HTTP 协议规范没有对 URL长度进行限制，这个限制是特定的浏览器以及服务器对它的限制。
 - 理论上讲，POST 是没有大小限制的，HTTP 协议规范也没有进行大小限制，出于安全考虑，服务器软件在实现时会做一定限制。
+
+### 参考文档
+
+[HTTP请求方法：GET、HEAD、POST、PUT、DELETE、CONNECT、OPTIONS、TRACE](https://itbilu.com/other/relate/EkwKysXIl.html "hp")

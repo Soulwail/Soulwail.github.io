@@ -1,29 +1,43 @@
 # careers section data
 # if you don't have language feature(language.yml is empty), ignore "i18n" items
 - name:
-    detail: 公司
-    i18n: company_a
+    detail: "北京思特奇"
+    i18n: Sitech
   desc:
-    detail: "上海客主商务服务有限公司"
-    i18n: company_a_desc
-  date:
-    detail: "2018 年 3 月"
-    i18n: company_a_date
-  job:
-    detail: "前端开发"
-    i18n: company_a_job
-  icon: fa-plus-square
-
-- name:
-    detail: 公司
-    i18n: company_b
-  desc:
-    detail: "成都愚创科技有限公司"
-    i18n: company_b_desc
+    detail: 在思特奇，我作为一名前端工程师，主要使用 Vue 开发 PC 端项目
+    i18n: "As a front-end engineer in Sitech, I mainly use Vue to develop PC terminal projects"
   date:
     detail: "2019 年 5 月"
-    i18n: company_b_date
+    i18n: May 2019
   job:
     detail: "前端开发工程师"
-    i18n: company_b_job
-  icon: fa-plus-square
+    i18n: The front-end development engineer
+  icon: fa-briefcase
+
+- name:
+    detail: "上海客主"
+    i18n: Kezhu
+  desc:
+    detail: 在客主，我主要使用 JQuery 和 Vue，开发 PC 端应用
+    i18n: "In the Kezhu, I mainly use JQuery and Vue to develop PC applications"
+  date:
+    detail: "2018 年 3 月"
+    i18n: Mar. 2018
+  job:
+    detail: "前端开发"
+    i18n: The front-end development
+  icon: fa-briefcase
+
+- name:
+    detail: "毕业"
+    i18n: Graduation
+  desc:
+    detail: 2017年7月大学毕业，开始了职业生涯
+    i18n: "At July 2017,I graduated from college and started my technology tour."
+  date:
+    detail: "2017 年 6 月"
+    i18n: Jun. 2017
+  job:
+    detail: "学生"
+    i18n: Student
+  icon: fa-graduation-cap
