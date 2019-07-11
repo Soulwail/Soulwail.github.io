@@ -57,7 +57,200 @@ const URL = 'https://www.google.com'
 
 ### 组件命名规范
 
+**官方文档推荐及使用遵循规则：**
 
+PascalCase（单词首字母大写命名）是最通用的**声明**约定
+
+kebab-case（短横线分隔命名）是最通用的**使用**约定
+
+- 组件名应该始终是多个单词的，根组件 App 除外
+- 有意义的名词、简短、具有可读性
+- 命名遵循 PascalCase 约定
+  - 公用组件以 Abcd（公司名缩写简称）开头，如（`AbcdDatePicker, AbcdTable`）
+  - 页面内部组件以组件模块名简写为开头，Item 为结尾，如（`StaffBenchToChargeItem, StaffBenchAppNotArrItem`）
+- 使用遵循 kebab-case 约定
+  - 在页面中使用组件需要前后闭合，并以短线分隔，如（`<abcd-date-picker></abcd-date-picker>, <abcd-table></abcd-table>`
+- 导入及注册组件时，遵循 PascalCase 约定
+- 同时还需要注意：必须符合自定义元素规范，切勿使用保留字
+
+### method 方法命名规范
+
+- 驼峰式命名，统一使用动词或者动词 + 名词形式
+
+```javascript
+// bad
+go, nextPage, show, open, login
+
+// good
+jumpPage, openCarInfoDialog
+```
+
+- 请求数据方法，以 data 结尾
+
+```javascript
+// bad
+takeData, confirmData, getList, postForm
+
+// good
+getListData, postFromData
+```
+
+- init、refresh 单词除外
+- 尽量使用常用单词开头（set、get、go、can、has、is）
+
+**附：**函数方法常用的动词
+
+```
+get 获取 / set 设置
+add 增加 / remove 删除
+create 创建 / destroy 移除
+start 启动 / stop 停止
+open 打开 / close 关闭
+read 读取 / write 写入
+load 载入 / save 保存
+create 创建 / destroy 销毁
+begin 开始 / end 结束
+backup 备份 / restore 恢复
+import 导入 / export 导出
+split 分割 / merge 合并
+inject 注入 / extract 提取
+attach 附着 / detach 脱离
+bind 绑定 / separate 分离
+view 查看 / browse 浏览
+edit 编辑 / modify 修改
+select 选取 / mark 标记
+copy 复制 / paste 粘贴
+undo 撤销 / redo 重做
+insert 插入 / delete 移除
+add 加入 / append 添加
+clean 清理 / clear 清除
+index 索引 / sort 排序
+find 查找 / search 搜索
+increase 增加 / decrease 减少
+play 播放 / pause 暂停
+launch 启动 / run 运行
+compile 编译 / execute 执行
+debug 调试 / trace 跟踪
+observe 观察 / listen 监听
+build 构建 / publish 发布
+input 输入 / output 输出
+encode 编码 / decode 解码
+encrypt 加密 / decrypt 解密
+compress 压缩 / decompress 解压缩
+pack 打包 / unpack 解包
+parse 解析 / emit 生成
+connect 连接 / disconnect 断开
+send 发送 / receive 接收
+download 下载 / upload 上传
+refresh 刷新 / synchronize 同步
+update 更新 / revert 复原
+lock 锁定 / unlock 解锁
+check out 签出 / check in 签入
+submit 提交 / commit 交付
+push 推 / pull 拉
+expand 展开 / collapse 折叠
+begin 起始 / end 结束
+start 开始 / finish 完成
+enter 进入 / exit 退出
+abort 放弃 / quit 离开
+obsolete 废弃 / depreciate 废旧
+collect 收集 / aggregate 聚集
+```
+
+### views 下的文件命名
+
+- 只有一个文件的情况下不会出现文件夹，而是直接放在 views 目录下面，如 index.vue
+- 尽量是名词，且使用驼峰命名法
+- 开头的单词就是所属模块的名字（workbenchIndex、workbenchList、workbenchEdit）
+- 名字至少两个单词（good: workbenchIndex）（bad：workbench）
+
+### props 命名
+
+在声明 prop 的时候，其命名应该始终使用 camelCase，而在模板中应该使用 kebab-case
+
+```javascript
+<!-- bad -->
+<script>
+props: {
+  'greeting-text': String
+}
+</script>
+
+<welcome-message grettingText="hi"></welcome-message>
+
+<!-- good -->
+<script>
+props: {
+  greetingText: String
+}
+</script>
+
+<welcome-message gretting-text="hi"></welcome-message>
+```
+
+### 例外情况
+
+1. 作用域不大临时变量可以简写，比如：str、num、bol、obj、fun、arr
+2. 循环变量可以简写，比如：i、j、k 等
+
+## 结构化目录
+
+### 目录文件夹及子文件规范
+
+- 以下统一管理处均对应相应模块
+- 以下全局文件均以 index.js 导出，并在 main.js 中导入
+- 以下临时文件，在使用后，接口已经有了，发版后清楚
+
+```
+src                               源码目录
+|-- api                              接口，统一管理
+|-- assets                           静态资源，统一管理
+|-- components                       公用组件，全局文件
+|-- filters                          过滤器，全局工具
+|-- icons                            图标，全局资源
+|-- datas                            模拟数据，临时存放
+|-- lib                              外部引用的插件存放及修改文件
+|-- mock                             模拟接口，临时存放
+|-- router                           路由，统一管理
+|-- store                            vuex, 统一管理
+|-- views                         视图目录
+|   |-- staffWorkbench               视图模块名
+|   |-- |-- staffWorkbench.vue       模块入口页面
+|   |-- |-- indexComponents          模块页面级组件文件夹
+|   |-- |-- components               模块通用组件文件夹
+```
+
+### vue 文件基本结构
+
+```javascript
+<template>
+  <div>
+    <!-- 必须在 div 中编写页面 -->
+  </div>
+</template>
+<script>
+  export default {
+    components: {
+
+    },
+    data () {
+      return {
+
+      }
+    },
+    mounted () {
+
+    },
+    methods: {
+
+    }
+  }
+</script>
+<!-- 声明语言，并添加 scoped -->
+<style lang="scss" scoped>
+
+</style>
+```
 
 ### 参考文档
 
