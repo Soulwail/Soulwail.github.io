@@ -199,7 +199,7 @@ props: {
 
 - 以下统一管理处均对应相应模块
 - 以下全局文件均以 index.js 导出，并在 main.js 中导入
-- 以下临时文件，在使用后，接口已经有了，发版后清楚
+- 以下临时文件，在使用后，接口已经有了，发版后清除
 
 ```
 src                               源码目录
@@ -371,8 +371,158 @@ var name = "abc";
 
 #### 使用 ES6 风格编码
 
-1. 定义变量使用 let，定义常量使用 const
-2. 静态字符串一律使用单引号或反引号，在
+- 定义变量使用 let，定义常量使用 const
+
+- 静态字符串一律使用单引号或反引号，动态字符串使用反引号。例如：
+
+  ```javascript
+  // bad
+  const a = 'foobar'
+  const b = 'foo' + a + 'bar'
+
+  // accepttable
+  const c = `foobar`
+
+  // good
+  const a = 'foobar'
+  const b = `foo${a}bar`
+  const c = 'foobar'
+  ```
+
+- 解构赋值
+
+  - 数组成员对变量赋值时，优先使用解构赋值
+
+    ```javascript
+    // 数组解构赋值
+    const arr = [1, 2, 3, 4]
+
+    // bad
+    const first = arr[0]
+    const second = arr[1]
+
+    // good
+    const [first, second] = arr
+    ```
+
+  - 函数的参数如果是对象的成员，优先使用解构赋值
+
+    ```javascript
+    // 对象解构赋值
+    // bad
+    function getFullName (user) {
+      const firstName = user.firstName
+      const lastName = user.lastName
+    }
+
+    // good
+    function getFullName (obj) {
+      const { firstName, lastName } = obj
+    }
+
+    // best
+    function getFullName ({ firstName, lastName }) {}
+    ```
+- 拷贝数组
+
+  使用扩展运算符 `...` 拷贝数组
+
+  ```javascript
+  const items = [1, 2, 3, 4]
+
+  // bad
+  const itemsCopy = items
+
+  // good
+  const itemsCopy = [...items]
+  ```
+
+- 箭头函数
+
+  需要使用函数表达式的场合，尽量用箭头函数代替。因为这样更简洁，而且绑定了 this。
+
+  ```javascript
+  // bad
+  const self = this
+  const boundMethod = function (...params) {
+    return method.apply(self, params)
+  }
+
+  // accepttable
+  const boundMethod = method.bind(this)
+
+  // best
+  const boundMethod = (...params) => method.apply(this, params)
+  ```
+
+- 模块
+
+  - 如果模块只有一个输出值，就使用 `export default`，如果模块有多个输出值，就不使用 `export default`，`export default` 与普通的 `export` 不要同时使用
+
+  ```javascript
+  // bad
+  import * as myObject from './importModule'
+
+  // good
+  import myObject from './importModule'
+  ```
+
+  - 如果模块默认输出一个函数，函数名的首字母应该小写
+
+  ```javascript
+  function makeStyleGuide () {
+
+  }
+
+  export default makeStyleGuide
+  ```
+
+  - 如果模块默认输出一个对象，对象名的首字母应该大写
+
+  ```javascript
+  const StyleGuide = {
+    es6: {}
+  }
+
+  export default StyleGuide
+  ```
+
+### 指令规范
+
+- 指令有缩写一律采用缩写形式
+- `v-for` 循环必须加上 `key` 属性，在整个 for 循环中 `key` 需要唯一
+- 避免 `v-if` 和 `v-for` 同时用在一个元素上（性能问题）
+
+  以下为两种解决方案：
+
+  - 将数据替换为一个计算属性，让其返回过滤后的列表
+  - 将 `v-if` 移动至容器元素上（比如 ul，ol）
+
+### Props 规范
+
+Props 定义应该尽量详细
+
+```javascript
+// bad 这样做只有开发原型系统时可以接受
+props: ['status']
+
+// good
+props: [
+  status: {
+    type: String,
+    required: true,
+    validator: function (value) {
+      return [
+        'syncing',
+        'synced',
+        'version-conflict',
+        'error'
+      ].indexOf(value) !== -1
+    }
+  }
+]
+```
+
 
 ### 参考文档
 
