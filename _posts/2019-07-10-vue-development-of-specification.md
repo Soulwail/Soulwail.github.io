@@ -168,7 +168,7 @@ collect 收集 / aggregate 聚集
 
 在声明 prop 的时候，其命名应该始终使用 camelCase，而在模板中应该使用 kebab-case
 
-```javascript
+```vuejs
 <!-- bad -->
 <script>
 props: {
@@ -222,7 +222,7 @@ src                               源码目录
 
 ### vue 文件基本结构
 
-```javascript
+```vue
 <template>
   <div>
     <!-- 必须在 div 中编写页面 -->
@@ -251,6 +251,128 @@ src                               源码目录
 
 </style>
 ```
+
+### 多个特性的元素规范
+
+多个特性的元素应该分多行撰写，每个特性一行。
+
+```vuejs
+<!-- bad -->
+<img src="https://vuejs.org/images/logo.png" alt="Vue Logo">
+<my-component foo="a" bar="b" baz="c"></my-component>
+
+<!-- good -->
+<img src="https://vuejs.org/images/logo.png"
+     alt="Vue Logo">
+
+<my-component foo="a"
+              bar="b"
+              baz="z">
+</my-component>
+```
+
+### 元素特性的顺序
+
+原生属性放在前面，指令放在后面
+
+如下所示：
+
+```
+- class
+- id, ref
+- name
+- data-*
+- src, for, type, href, value, max-lenght, max, min, pattern
+- title, alt, placeholder
+- aria-*, role
+- required, readonly, disabled
+- is
+- v-for
+- key
+- v-if
+- v-else-if
+- v-else
+- v-show
+- v-cloak
+- v-pre
+- v-once
+- v-model
+- v-bind, :
+- v-on, @
+- v-html
+- v-text
+```
+
+### 组件顺序选择
+
+如下所示：
+
+```
+- components
+- props
+- data
+- computed
+- created
+- mounted
+- methods
+- filters
+- watch
+```
+
+## 注释规范
+
+代码注释在一个项目的后期维护中显得尤为重要，所以我们要为每一个被复用的组件编写组件使用说明，为组件中每一个方法编写方法说明。
+
+### 务必添加注释列表
+
+1. 公共组件使用说明
+2. 各组件中重要函数或者类说明
+3. 复杂的业务逻辑处理说明
+4. 特殊情况的代码处理说明，对于代码中特殊用途的变量、存在临界值、函数中使用的 hack、使用了某种算法或思路等需要进行注释描述
+5. 多重 if 判断语句
+6. 注释块必须以 `/** （至少两个星号）开头 **/`
+7. 单行注释使用 `//`
+
+### 单行注释
+
+注释单独一行，不要在代码后的同一行内加注释。例如：
+
+```javascript
+// bad
+var name = "abc"; // 姓名
+
+// good
+// 姓名
+var name = "abc";
+```
+
+### 多行注释
+
+```javascript
+// 组件使用说明，和调用说明
+/**
+ * - 组件名称
+ * @module 组件存放位置
+ * @desc 组件描述
+ * @author 组件作者
+ * @date 2019年07月12日14:39:50
+ * @param {Object} [title] - 参数说明
+ * @param {String} [columns] - 参数说明
+ * @example 调用示例
+ * <hbTable :title="title" :columns="columns" :tableData="tableData"></hbTable>
+ */
+```
+
+## 编码规范
+
+优秀的项目源码，即使是多人开发，看代码也如出一人之手。统一的编码规范，可使代码更易于阅读，易于理解，易于维护。尽量按照 ESlint 格式要求编写代码。
+
+### 源码风格
+
+#### 使用 ES6 风格编码
+
+1. 定义变量使用 let，定义常量使用 const
+2. 静态字符串一律使用单引号或反引号，在
 
 ### 参考文档
 
