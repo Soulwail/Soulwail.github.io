@@ -199,7 +199,7 @@ props: {
 
 - 以下统一管理处均对应相应模块
 - 以下全局文件均以 index.js 导出，并在 main.js 中导入
-- 以下临时文件，在使用后，接口已经有了，发版后清楚
+- 以下临时文件，在使用后，接口已经有了，发版后清除
 
 ```
 src                               源码目录
@@ -371,8 +371,304 @@ var name = "abc";
 
 #### 使用 ES6 风格编码
 
-1. 定义变量使用 let，定义常量使用 const
-2. 静态字符串一律使用单引号或反引号，在
+- 定义变量使用 let，定义常量使用 const
+
+- 静态字符串一律使用单引号或反引号，动态字符串使用反引号。例如：
+
+  ```javascript
+  // bad
+  const a = 'foobar'
+  const b = 'foo' + a + 'bar'
+
+  // accepttable
+  const c = `foobar`
+
+  // good
+  const a = 'foobar'
+  const b = `foo${a}bar`
+  const c = 'foobar'
+  ```
+
+- 解构赋值
+
+  - 数组成员对变量赋值时，优先使用解构赋值
+
+    ```javascript
+    // 数组解构赋值
+    const arr = [1, 2, 3, 4]
+
+    // bad
+    const first = arr[0]
+    const second = arr[1]
+
+    // good
+    const [first, second] = arr
+    ```
+
+  - 函数的参数如果是对象的成员，优先使用解构赋值
+
+    ```javascript
+    // 对象解构赋值
+    // bad
+    function getFullName (user) {
+      const firstName = user.firstName
+      const lastName = user.lastName
+    }
+
+    // good
+    function getFullName (obj) {
+      const { firstName, lastName } = obj
+    }
+
+    // best
+    function getFullName ({ firstName, lastName }) {}
+    ```
+- 拷贝数组
+
+  使用扩展运算符 `...` 拷贝数组
+
+  ```javascript
+  const items = [1, 2, 3, 4]
+
+  // bad
+  const itemsCopy = items
+
+  // good
+  const itemsCopy = [...items]
+  ```
+
+- 箭头函数
+
+  需要使用函数表达式的场合，尽量用箭头函数代替。因为这样更简洁，而且绑定了 this。
+
+  ```javascript
+  // bad
+  const self = this
+  const boundMethod = function (...params) {
+    return method.apply(self, params)
+  }
+
+  // accepttable
+  const boundMethod = method.bind(this)
+
+  // best
+  const boundMethod = (...params) => method.apply(this, params)
+  ```
+
+- 模块
+
+  - 如果模块只有一个输出值，就使用 `export default`，如果模块有多个输出值，就不使用 `export default`，`export default` 与普通的 `export` 不要同时使用
+
+  ```javascript
+  // bad
+  import * as myObject from './importModule'
+
+  // good
+  import myObject from './importModule'
+  ```
+
+  - 如果模块默认输出一个函数，函数名的首字母应该小写
+
+  ```javascript
+  function makeStyleGuide () {
+
+  }
+
+  export default makeStyleGuide
+  ```
+
+  - 如果模块默认输出一个对象，对象名的首字母应该大写
+
+  ```javascript
+  const StyleGuide = {
+    es6: {}
+  }
+
+  export default StyleGuide
+  ```
+
+### 指令规范
+
+- 指令有缩写一律采用缩写形式
+
+```javascript
+// bad
+v-bind:class="{ 'show-left': true }"
+v-on:click="getListData"
+
+// good
+:class="{ 'show-left': true }"
+@click="getListData"
+```
+
+- `v-for` 循环必须加上 `key` 属性，在整个 for 循环中 `key` 需要唯一
+
+```vuejs
+<!-- bad -->
+<ul>
+  <li v-for="todo in todos">
+    {{ todo.text }}
+  </li>
+</ul>
+
+<!-- good -->
+<ul>
+  <li v-for="todo in todos" :key="todo.id">
+    {{ todo.text }}
+  </li>
+</ul>
+```
+
+- 避免 `v-if` 和 `v-for` 同时用在一个元素上（性能问题）
+
+  以下为两种解决方案：
+
+  - 将数据替换为一个计算属性，让其返回过滤后的列表
+
+  ```vuejs
+  <!-- bad -->
+  <ul>
+    <li v-for="user in users" v-if="user.isActive" :key="user.id">
+      {{ user.name }}
+    </li>
+  </ul>
+
+  <!-- good -->
+  <ul>
+    <li v-for="user in activeUsers" :key="user.id">
+      {{ user,name }}
+    </li>
+  </ul>
+
+  <script>
+  computed: {
+    activeUsers: function () {
+      return this.users.filter(function (user) {
+        return user.isActive
+      })
+    }
+  }
+  </script>
+  ```
+
+  - 将 `v-if` 移动至容器元素上（比如 ul，ol）
+
+  ```vuejs
+  <!-- bad -->
+  <ul>
+    <li v-for="user in users" v-if="shouldShowUsers" :key="user.id">
+      {{ user.name }}
+    </li>
+  </ul>
+
+  <!-- good -->
+  <ul v-if="shouldShowUsers">
+    <li v-for="user in users" :key="user.id">
+      {{ user.name }}
+    </li>
+  </ul>
+  ```
+
+### Props 规范
+
+Props 定义应该尽量详细
+
+```javascript
+// bad 这样做只有开发原型系统时可以接受
+props: ['status']
+
+// good
+props: [
+  status: {
+    type: String,
+    required: true,
+    validator: function (value) {
+      return [
+        'syncing',
+        'synced',
+        'version-conflict',
+        'error'
+      ].indexOf(value) !== -1
+    }
+  }
+]
+```
+### 其他
+
+- 避免 `this.$parent`
+- 调试信息 `console.log()`、`debugger` 使用完及时删除
+- 除了三目运算，`if`、`else` 等禁止简写
+
+```javascript
+// bad
+if (true)
+  alert(name);
+console.log(name);
+
+// bad
+if (true)
+alert(name);
+console.log(name);
+
+// good
+if (true) {
+  alert(name);
+}
+console.log(name);
+```
+
+## CSS 规范
+
+### 通用规范
+
+1. 统一使用 "-" 连字符
+2. 省略值为 0 时的单位
+
+    ```CSS
+    // bad
+    padding-bottom: 0px;
+    margin: 0em;
+
+    // good
+    padding-bottom: 0;
+    margin: 0;
+    ```
+
+3. 如果 CSS 可以做到，就不要使用 JS
+4. 建议并适当缩写值，提高可读性，特殊情况除外
+
+  “建议并适当”是因为缩写总是会包含一系列的值，而有时候我们并不希望设置某一值，反而造成了麻烦，那么这时候你可以不缩写，而是分开写。
+
+  当然，在一切可以缩写的情况下，请务必缩写，它最大的好处就是节省了字节，便于维护，并使阅读更加一目了然。
+
+  ```CSS
+  // bad
+  .box {
+    border-top-style: none;
+    font-family: palatino, georgia, serif;
+    font-size: 100%;
+    line-height: 1.6;
+    padding-bottom: 2em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0;
+  }
+
+  // good
+  .box {
+    border-top: 0;
+    font: 100%/1.6 palatino, georgia, serif;
+    padding: 0 1em 2em;
+  }
+  ```
+
+5. 声明应该按照下表的顺序
+
+  左到右，从上到下
+
+|显示属性|自身属性|文本属性和其他修饰|
+|---|---|---|
+|display|width|font|
 
 ### 参考文档
 
