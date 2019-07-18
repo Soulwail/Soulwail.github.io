@@ -199,7 +199,7 @@ props: {
 
 - 以下统一管理处均对应相应模块
 - 以下全局文件均以 index.js 导出，并在 main.js 中导入
-- 以下临时文件，在使用后，接口已经有了，发版后清楚
+- 以下临时文件，在使用后，接口已经有了，发版后清除
 
 ```
 src                               源码目录
@@ -637,39 +637,113 @@ console.log(name);
 3. 如果 CSS 可以做到，就不要使用 JS
 4. 建议并适当缩写值，提高可读性，特殊情况除外
 
-  “建议并适当”是因为缩写总是会包含一系列的值，而有时候我们并不希望设置某一值，反而造成了麻烦，那么这时候你可以不缩写，而是分开写。
+    “建议并适当”是因为缩写总是会包含一系列的值，而有时候我们并不希望设置某一值，反而造成了麻烦，那么这时候你可以不缩写，而是分开写。
 
-  当然，在一切可以缩写的情况下，请务必缩写，它最大的好处就是节省了字节，便于维护，并使阅读更加一目了然。
+    当然，在一切可以缩写的情况下，请务必缩写，它最大的好处就是节省了字节，便于维护，并使阅读更加一目了然。
 
-  ```CSS
-  // bad
-  .box {
-    border-top-style: none;
-    font-family: palatino, georgia, serif;
-    font-size: 100%;
-    line-height: 1.6;
-    padding-bottom: 2em;
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: 0;
-  }
+    ```CSS
+    // bad
+    .box {
+      border-top-style: none;
+      font-family: palatino, georgia, serif;
+      font-size: 100%;
+      line-height: 1.6;
+      padding-bottom: 2em;
+      padding-left: 1em;
+      padding-right: 1em;
+      padding-top: 0;
+    }
 
-  // good
-  .box {
-    border-top: 0;
-    font: 100%/1.6 palatino, georgia, serif;
-    padding: 0 1em 2em;
-  }
-  ```
+    // good
+    .box {
+      border-top: 0;
+      font: 100%/1.6 palatino, georgia, serif;
+      padding: 0 1em 2em;
+    }
+    ```
 
 5. 声明应该按照下表的顺序
 
-  左到右，从上到下
+    左到右，从上到下
 
-|显示属性|自身属性|文本属性和其他修饰|
-|---|---|---|
-|display|width|font|
+    |显示属性|自身属性|文本属性和其他修饰|
+    |---|---|---|
+    |display|width|font|
+    |visibility|height|text-align|
+    |position|margin|text-decoration|
+    |float|padding|vertical-align|
+    |clear|border|white-space|
+    |list-style|overflow|color|
+    |top|min-width|background|
+
+    ---
+
+    ```CSS
+    // bad
+    .box {
+      font-family: 'Arial', sans-serif;
+      border: 3px solid #ddd;
+      left: 30%;
+      position: absolute;
+      text-transform: uppercase;
+      background-color: #eee;
+      right: 30%;
+      display: block;
+      font-size: 1.5rem;
+      overflow: hidden;
+      padding: 1em;
+      margin: 1em;
+    }
+
+    // good
+    .box {
+      display: block;
+      position: absolute;
+      left: 30%;
+      right: 30%;
+      overflow: hidden;
+      margin: 1em;
+      padding: 1em;
+      background-color: #eee;
+      border: 3px solid #ddd;
+      font-family: 'Arial', sans-serif;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+    }
+    ```
+
+6. 元素选择器应该避免在 scoped 中出现
+
+    [官方文档说明](https://cn.vuejs.org/v2/style-guide/#scoped-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E9%80%89%E6%8B%A9%E5%99%A8-%E8%B0%A8%E6%85%8E%E4%BD%BF%E7%94%A8)：在 scoped 样式中，类选择器比元素选择器更好，因为大量使用元素选择器是很慢的。
+
+7. 分类的命名方式
+
+    使用单个字母加上 “-” 为前缀
+
+    - 布局（grid）（.g-）
+    - 模块（module）（.m-）
+    - 元件（unit）（.u-）
+    - 功能（function）（.f-）
+    - 皮肤（skin）（.s-）
+    - 状态（.z-）
+
+8. 统一语义理解和命名
+
+    布局（.g-）
+
+    |语义|命名|简写|
+    |---|---|---|
+
+### sass 规范
+
+### 特殊规范
 
 ### 参考文档
 
 [史上最全的Vue开发规范](https://juejin.im/post/5b67e49551882508603d1431 "hp")
+
+[风格指南](https://cn.vuejs.org/v2/style-guide/ "hp")
+
+[更好的css方案](http://nec.netease.com/ "hp")
+
+[前端js规范文档](https://www.xuanfengge.com/fedoc/ "hp")
