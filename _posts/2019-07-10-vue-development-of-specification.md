@@ -507,14 +507,14 @@ v-on:click="getListData"
 <!-- bad -->
 <ul>
   <li v-for="todo in todos">
-    {{ todo.text }}
+    {% raw %}{{ todo.text }}{% endraw %}
   </li>
 </ul>
 
 <!-- good -->
 <ul>
   <li v-for="todo in todos" :key="todo.id">
-    {{ todo.text }}
+    {% raw %}{{ todo.text }}{% endraw %}
   </li>
 </ul>
 ```
@@ -529,14 +529,14 @@ v-on:click="getListData"
   <!-- bad -->
   <ul>
     <li v-for="user in users" v-if="user.isActive" :key="user.id">
-      {{ user.name }}
+      {% raw %}{{ user.name }}{% endraw %}
     </li>
   </ul>
 
   <!-- good -->
   <ul>
     <li v-for="user in activeUsers" :key="user.id">
-      {{ user,name }}
+      {% raw %}{{ user.name }}{% endraw %}
     </li>
   </ul>
 
@@ -557,14 +557,14 @@ v-on:click="getListData"
   <!-- bad -->
   <ul>
     <li v-for="user in users" v-if="shouldShowUsers" :key="user.id">
-      {{ user.name }}
+      {% raw %}{{ user.name }}{% endraw %}
     </li>
   </ul>
 
   <!-- good -->
   <ul v-if="shouldShowUsers">
     <li v-for="user in users" :key="user.id">
-      {{ user.name }}
+      {% raw %}{{ user.name }}{% endraw %}
     </li>
   </ul>
   ```
