@@ -108,7 +108,7 @@ console.log(schedule1 === schedule2) // true
 
 结构大概如下图：
 
-<div><img src="https://github.com/Soulwail/Soulwail.github.io/blob/master/image_files/singleton_pattern.png" style="zoom:60%;" /></div>
+<div><img width="700" src="https://github.com/Soulwail/Soulwail.github.io/raw/master/image_files/singleton_pattern.png"/></div>
 
 下面使用通用的方法来实现一下。
 
