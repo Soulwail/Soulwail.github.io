@@ -15,3 +15,9 @@ windows
 ```javascript
 jekyll serve --watch --baseurl=""
 ```
+
+## Curly braces cannot be used in markdown
+
+Use `raw` block, such as `{% raw %} {{ temp }} {% endraw %}`
+
+[https://hexo.io/docs/troubleshooting.html#Escape_Contents](https://hexo.io/docs/troubleshooting.html#Escape_Contents)
