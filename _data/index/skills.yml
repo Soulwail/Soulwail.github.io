@@ -2,5 +2,5 @@
 
 label: Ability
 id : cs
-aspects: Git, HTML5, CSS3, JavaScript, VueJS
-percentage: 60, 50, 40, 40, 35
+aspects: Git, HTML5, CSS3, JavaScript, VueJS, Webpack
+percentage: 80, 60, 60, 75, 70, 25
