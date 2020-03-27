@@ -447,7 +447,7 @@ class Animal {
   constructor(name) {
     this.name = name;
   }
-  
+
   getName() {
     return this.name;
   }
@@ -640,7 +640,7 @@ use: [
 
 当本地资源较多时，我们有时会希望它们能打包在一个文件夹下，这也很简单，我们只需要在 `url-loader` 的 `options` 中指定 `outpath`，如 `outpath: 'assets'`，构建出的目录如下：
 
-<div><img width="700" src="https://github.com/Soulwail/Soulwail.github.io/raw/master/image_files/wp_05.png"/></div>
+<div><img width="350" src="https://github.com/Soulwail/Soulwail.github.io/raw/master/image_files/wp_05.png"/></div>
 
 更多的 `url-loader` 配置可以查看官方文档。
 
