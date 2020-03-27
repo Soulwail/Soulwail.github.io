@@ -18,6 +18,9 @@
 - name: Vue
   href: /vue/
 
+- name: Webpack
+  href: /webpack/
+
 # - name: Database
 #   href: /database/
 
