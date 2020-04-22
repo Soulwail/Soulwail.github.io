@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 深度解锁 Webpack（基础篇）
-date: 2020-02-17
+date: 2020-03-18
 desc: "Webpack 学习"
 keywords: "Js, Webpack"
 categories: [Webpack]
@@ -49,7 +49,7 @@ class Animal {
   constructor(name) {
     this.name = name;
   }
-  
+
   getName() {
     return this.name;
   }
@@ -70,9 +70,9 @@ const dog = new Animal('dog');
 {
   "./src/index.js":
   	(function (module, exports) {
-      
+
       eval("class Animal {\n    constructor(name) {\n        this.name = name;\n    }\n    getName() {\n        return this.name;\n    }\n}\n\nconst dog = new Animal('dog');\n\n//# sourceURL=webpack:///./src/index.js?");
-      
+
     })
 }
 ```
