@@ -1,6 +1,20 @@
 # careers section data
 # if you don't have language feature(language.yml is empty), ignore "i18n" items
 - name:
+    detail: "亚信科技"
+    i18n: AsiaInfo
+  desc:
+    detail: 在思特奇，我作为一名前端工程师，主要使用 Vue 开发 ERP 系统
+    i18n: "As a front-end engineer in Sitech, I mainly use Vue to develop Enterprise Resource Planning"
+  date:
+    detail: "2020 年 5 月"
+    i18n: May 2020
+  job:
+    detail: "前端开发工程师"
+    i18n: The front-end development engineer
+  icon: fa-briefcase
+
+- name:
     detail: "北京思特奇"
     i18n: Sitech
   desc:
